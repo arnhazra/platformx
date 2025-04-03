@@ -24,6 +24,7 @@ const initialState: GlobalState = {
     name: "",
     reduceCarbonEmissions: true,
     role: "",
+    walletAddress: "",
   },
   subscription: null,
   isSubscriptionActive: false,
