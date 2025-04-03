@@ -116,7 +116,7 @@ export default function Page() {
       <section>
         <div className="flex">
           <p className="text-white text-lg">
-            {findModelRequestState.selectedFilter} Models
+            {findModelRequestState.selectedFilter} Datasets
           </p>
           <div className="ml-auto flex items-center gap-2">
             <DropdownMenu>
