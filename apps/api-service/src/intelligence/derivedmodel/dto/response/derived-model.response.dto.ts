@@ -9,7 +9,6 @@ export class DerivedModelResponseDto {
   baseModel: BaseModel
   modelOwner: User
   isFineTuned: boolean
-  systemPrompt: string
   responseFormat: string
   isPublic: boolean
 }

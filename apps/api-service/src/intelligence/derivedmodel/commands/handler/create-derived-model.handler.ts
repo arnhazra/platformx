@@ -14,20 +14,12 @@ export class CreateDerivedModelCommandHandler
   ) {}
 
   async execute(command: CreateDerivedModelCommand) {
-    const {
-      baseModel,
-      category,
-      description,
-      systemPrompt,
-      displayName,
-      isPublic,
-      dataset,
-    } = command.createDerivedModelDto
+    const { baseModel, category, description, displayName, isPublic, dataset } =
+      command.createDerivedModelDto
     const derivedModel = await this.repository.create({
       baseModel: objectId(baseModel),
       category,
       description,
-      systemPrompt,
       displayName,
       modelOwner: objectId(command.userId),
       isPublic,

@@ -49,7 +49,6 @@ export default function Page() {
     baseModel: "",
     category: "",
     description: "",
-    systemPrompt: "",
     displayName: "",
     isPublic: false,
     dataset: null,
@@ -211,21 +210,6 @@ export default function Page() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="systemPrompt">System Prompt</Label>
-              <Textarea
-                disabled={isLoading}
-                id="systemPrompt"
-                name="systemPrompt"
-                placeholder="Enter the system prompt for your model"
-                className="min-h-[100px] bg-border border-lightborder"
-                required
-                onChange={(e): void =>
-                  setState({ ...state, systemPrompt: e.target.value })
-                }
-              />
-            </div>
-
-            <div className="space-y-2">
               <Label htmlFor="dataset">Dataset (JSON, max 1MB)</Label>
               <Input
                 disabled={isLoading}
@@ -233,11 +217,11 @@ export default function Page() {
                 id="dataset"
                 name="dataset"
                 accept=".json,application/json"
-                className="bg-border border-lightborder"
+                className="bg-border border-lightborder text-white"
                 onChange={handleFileUpload}
               />
               <p className="text-xs text-zinc-400">
-                Upload a JSON file containing your dataset (optional)
+                Upload a JSON file containing your dataset
               </p>
             </div>
 

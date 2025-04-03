@@ -15,7 +15,6 @@ export class FindHistoryQueryHandler
       .find({ userId: objectId(userId) })
       .populate({
         path: "derivedModel",
-        select: "-systemPrompt",
         populate: {
           path: "baseModel",
         },

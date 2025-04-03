@@ -18,8 +18,6 @@ import OpenAIStrategy from "./strategies/openai.strategy"
 import { GetUsageByUserIdQuery } from "./queries/impl/get-usage-by-user-id.query"
 import { statusMessages } from "@/shared/constants/status-messages"
 import { HttpService } from "@nestjs/axios"
-import { lastValueFrom } from "rxjs"
-import { config } from "@/config"
 
 @Injectable()
 export class ChatService {
@@ -105,6 +103,17 @@ export class ChatService {
         throw new ForbiddenException(statusMessages.subscriptionNotFound)
       }
 
+      const systemPrompt =
+        "This is a dataset, users will ask questions based on this dataset. " +
+        "You are a helpful assistant. " +
+        "Please answer the questions based on the dataset. " +
+        "If you don't know the answer, please say 'I don't know'. " +
+        "If the question is not related to the dataset, please say 'I don't know'. " +
+        "If the question is not clear, please ask for clarification. " +
+        "If the question is too complex, please ask for clarification. " +
+        "The details of the dataset is below: " +
+        JSON.stringify(gModel)
+
       if (gModel.baseModel.genericName.includes("gemini")) {
         const { response } = await GeminiStrategy(
           gModel.baseModel.genericName,
@@ -112,7 +121,7 @@ export class ChatService {
           topP ?? gModel.baseModel.defaultTopP,
           thread,
           prompt,
-          gModel.systemPrompt
+          systemPrompt
         )
         await this.commandBus.execute<CreateThreadCommand, Thread>(
           new CreateThreadCommand(userId, threadId, prompt, response)
@@ -125,7 +134,7 @@ export class ChatService {
           topP ?? gModel.baseModel.defaultTopP,
           thread,
           prompt,
-          gModel.systemPrompt
+          systemPrompt
         )
         await this.commandBus.execute<CreateThreadCommand, Thread>(
           new CreateThreadCommand(userId, threadId, prompt, response)
@@ -138,7 +147,7 @@ export class ChatService {
           topP ?? gModel.baseModel.defaultTopP,
           thread,
           prompt,
-          gModel.systemPrompt
+          systemPrompt
         )
         await this.commandBus.execute<CreateThreadCommand, Thread>(
           new CreateThreadCommand(userId, threadId, prompt, response)

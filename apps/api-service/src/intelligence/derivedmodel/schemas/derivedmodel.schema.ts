@@ -23,9 +23,6 @@ export class DerivedModel extends Document {
   @Prop({ required: true, default: true })
   isFineTuned: boolean
 
-  @Prop({ required: true })
-  systemPrompt: string
-
   @Prop({ required: true, default: "text" })
   responseFormat: string
 

@@ -83,9 +83,7 @@ export class DerivedModelController {
         userId,
         modelId,
       })
-      const { systemPrompt, ...modelWithoutSystemPrompt } =
-        await this.service.findOneDerivedModel(modelId)
-      return modelWithoutSystemPrompt
+      return await this.service.findOneDerivedModel(modelId)
     } catch (error) {
       throw error
     }

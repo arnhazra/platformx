@@ -14,9 +14,6 @@ export class CreateDerivedModelDto {
   readonly baseModel: string
 
   @IsNotEmpty()
-  readonly systemPrompt: string
-
-  @IsNotEmpty()
   readonly isPublic: boolean
 
   @IsNotEmpty()

@@ -29,7 +29,6 @@ export class FindAllDerivedModelsQueryHandler
         isPublic: true,
       })
       .populate("baseModel")
-      .select("-systemPrompt")
       .sort(selectedSortOption)
       .skip(offset)
       .limit(limit)

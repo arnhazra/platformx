@@ -217,7 +217,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                   href={`/playground/${modelId}`}
                 >
                   <MessageCircle className="me-2 scale-75" />
-                  Chat Playground
+                  Chat with this dataset
                 </Link>
                 <Heart
                   fill={isFavourited ? "#ff2056" : "#18181b"}
