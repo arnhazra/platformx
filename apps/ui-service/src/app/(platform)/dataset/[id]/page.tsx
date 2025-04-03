@@ -18,7 +18,7 @@ import Show from "@/shared/components/show"
 import ActivityLog from "@/shared/components/activity"
 import { use, useEffect, useState } from "react"
 import { DerivedModel } from "@/shared/types"
-import { DerivedModelCard } from "@/shared/components/modelcard"
+import { DatasetCard } from "@/shared/components/modelcard"
 import Error from "@/app/error"
 import Share from "@/shared/components/share"
 import Link from "next/link"
@@ -76,7 +76,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     })
 
   const renderRelatedModels = relatedModels?.data?.map((model) => {
-    return <DerivedModelCard key={model._id} model={model} />
+    return <DatasetCard key={model._id} model={model} />
   })
 
   const toggleFavourite = async (): Promise<void> => {
@@ -114,8 +114,30 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           </CardHeader>
           <CardContent className="p-6 text-sm">
             <div className="grid gap-3">
-              <div className="font-semibold text-lg">Model Details</div>
+              <div className="grid gap-3">
+                <div className="font-semibold text-lg">Dataset Tags</div>
+                <div>{renderModelTags}</div>
+              </div>
+              <Separator className="my-4 bg-border" />
+              <div className="font-semibold text-lg">
+                Dataset & Model Details
+              </div>
               <ul className="grid gap-3">
+                <li className="flex items-center justify-between">
+                  <span>Dataset Owner</span>
+                  <span className="flex">
+                    {model?.data?.modelOwner?.name}
+                    <Link
+                      href={`https://www.oklink.com/amoy/tx/${model?.data?.transactionHash}`}
+                      target="_blank"
+                    >
+                      <Hexagon
+                        className="h-5 w-5 ms-1 text-green-500"
+                        fill="currentColor"
+                      />
+                    </Link>
+                  </span>
+                </li>
                 <li className="flex items-center justify-between">
                   <span>Architecture</span>
                   <span>{model?.data?.baseModel?.architecture}</span>
@@ -148,21 +170,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                   <span>Parameters</span>
                   <span>{model?.data?.baseModel?.parameters}</span>
                 </li>
-                <li className="flex items-center justify-between">
-                  <span>Model Owner</span>
-                  <span className="flex">
-                    {model?.data?.modelOwner?.name}
-                    <Link
-                      href={`https://www.oklink.com/amoy/tx/${model?.data?.transactionHash}`}
-                      target="_blank"
-                    >
-                      <Hexagon
-                        className="h-5 w-5 ms-1 text-green-500"
-                        fill="currentColor"
-                      />
-                    </Link>
-                  </span>
-                </li>
+
                 <li className="flex items-center justify-between">
                   <span>Fine Tuned</span>
                   <span>{model?.data?.isFineTuned ? "Yes" : "No"}</span>
@@ -174,15 +182,10 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                   </span>
                 </li>
                 <li className="flex items-center justify-between">
-                  <span>Model Visibility</span>
+                  <span>Dataset Visibility</span>
                   <span>{model?.data?.isPublic ? "Public" : "Private"}</span>
                 </li>
               </ul>
-            </div>
-            <Separator className="my-4 bg-border" />
-            <div className="grid gap-3">
-              <div className="font-semibold text-lg">Model Tags</div>
-              <div>{renderModelTags}</div>
             </div>
           </CardContent>
           <CardFooter className="flex flex-row items-center bg-muted/50 px-6 py-3">

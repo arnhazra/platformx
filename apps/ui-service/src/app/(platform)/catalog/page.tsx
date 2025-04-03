@@ -12,7 +12,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu"
 import { ChevronLeft, ChevronRight, Filter, SortAsc } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
-import { DerivedModelCard } from "@/shared/components/modelcard"
+import { DatasetCard } from "@/shared/components/modelcard"
 import { DerivedModel, FilterAndSortOptions } from "@/shared/types"
 import { GlobalContext } from "@/context/globalstate.provider"
 
@@ -93,7 +93,7 @@ export default function Page() {
   )
 
   const renderModels = models?.data?.map((model) => {
-    return <DerivedModelCard key={model._id} model={model} />
+    return <DatasetCard key={model._id} model={model} />
   })
 
   const prevPage = () => {

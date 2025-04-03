@@ -14,7 +14,7 @@ interface BaseModelCardProps {
   model: BaseModel
 }
 
-interface DerivedModelCardProps {
+interface DatasetCardProps {
   model: DerivedModel
 }
 
@@ -95,11 +95,11 @@ export function BaseModelCard({ model }: BaseModelCardProps) {
   )
 }
 
-export function DerivedModelCard({ model }: DerivedModelCardProps) {
-  const { _id, baseModel, category, displayName } = model
+export function DatasetCard({ model }: DatasetCardProps) {
+  const { _id, baseModel, category, displayName, modelOwner } = model
 
   return (
-    <Link href={`/model/${_id}`}>
+    <Link href={`/dataset/${_id}`}>
       <Card className="w-full max-w-xs mx-auto h-[23rem] flex flex-col relative hover:shadow-md transition-shadow bg-background border-border text-white">
         <CardHeader className="pb-2">
           <div className="flex items-start">
@@ -137,7 +137,7 @@ export function DerivedModelCard({ model }: DerivedModelCardProps) {
               <dd className="text-sm font-semibold">{category}</dd>
             </div>
             <div className="space-y-1">
-              <dt className="text-xs font-medium text-zinc-300">Base Model</dt>
+              <dt className="text-xs font-medium text-zinc-300">Query Model</dt>
               <dd className="text-sm font-semibold capitalize">
                 {baseModel?.displayName}
               </dd>

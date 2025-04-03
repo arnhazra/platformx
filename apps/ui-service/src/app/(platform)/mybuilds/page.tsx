@@ -2,7 +2,7 @@
 import { endPoints } from "@/shared/constants/api-endpoints"
 import HTTPMethods from "@/shared/constants/http-methods"
 import useQuery from "@/shared/hooks/use-query"
-import { DerivedModelCard } from "@/shared/components/modelcard"
+import { DatasetCard } from "@/shared/components/modelcard"
 import { DerivedModel } from "@/shared/types"
 
 export default function Page() {
@@ -13,7 +13,7 @@ export default function Page() {
   })
 
   const renderModels = myBuilds?.data?.map((build) => {
-    return <DerivedModelCard key={build._id} model={build} />
+    return <DatasetCard key={build._id} model={build} />
   })
 
   return (

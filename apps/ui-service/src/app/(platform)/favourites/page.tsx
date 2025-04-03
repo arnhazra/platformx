@@ -2,7 +2,7 @@
 import { endPoints } from "@/shared/constants/api-endpoints"
 import HTTPMethods from "@/shared/constants/http-methods"
 import useQuery from "@/shared/hooks/use-query"
-import { DerivedModelCard } from "@/shared/components/modelcard"
+import { DatasetCard } from "@/shared/components/modelcard"
 import { Favourites } from "@/shared/types"
 
 export default function Page() {
@@ -14,9 +14,7 @@ export default function Page() {
 
   const renderModels = favourites?.data?.map((favourite) => {
     if (!favourite.derivedModel) return null
-    return (
-      <DerivedModelCard key={favourite._id} model={favourite.derivedModel} />
-    )
+    return <DatasetCard key={favourite._id} model={favourite.derivedModel} />
   })
 
   return (
