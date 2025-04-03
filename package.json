@@ -1,6 +1,6 @@
 {
   "name": "platformx",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "a saas product",
   "scripts": {
     "api-service": "npm run dev --prefix apps/api-service",
