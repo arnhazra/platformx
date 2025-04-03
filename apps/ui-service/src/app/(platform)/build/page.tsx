@@ -22,11 +22,11 @@ import { endPoints } from "@/shared/constants/api-endpoints"
 import HTTPMethods from "@/shared/constants/http-methods"
 import useQuery from "@/shared/hooks/use-query"
 import { BaseModel } from "@/shared/types"
-import { useContext, useState } from "react"
+import { ChangeEventHandler, useContext, useState } from "react"
 import ky from "ky"
 import { uiConstants } from "@/shared/constants/global-constants"
-import { GlobalContext } from "@/context/globalstate.provider"
 import { SubscriptionModal } from "@/shared/components/subscriptionmodal"
+import { GlobalContext } from "@/context/globalstate.provider"
 
 const categories = [
   "General",
@@ -35,7 +35,6 @@ const categories = [
   "Healthcare",
   "Lifestyle",
   "Productivity",
-  "Programming",
   "Research",
   "Social Media",
   "Sports",
@@ -53,6 +52,7 @@ export default function Page() {
     systemPrompt: "",
     displayName: "",
     isPublic: false,
+    dataset: null,
   })
   const [isLoading, setLoading] = useState(false)
   const [message, setMessage] = useState("")
@@ -75,6 +75,31 @@ export default function Page() {
       setMessage(uiConstants.modelCreationFailed)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleFileUpload = async (event: any) => {
+    const file = event.target.files[0]
+
+    if (!file) return
+
+    if (file.type !== "application/json") {
+      setMessage("Please upload a JSON file")
+      return
+    }
+
+    if (file.size > 1048576) {
+      setMessage("File size must be less than 1MB")
+      return
+    }
+
+    try {
+      const fileContent = await file.text()
+      const fileJson = JSON.parse(fileContent)
+      setState({ ...state, dataset: fileJson })
+      setMessage("Dataset uploaded successfully")
+    } catch (error) {
+      setMessage("Invalid JSON file")
     }
   }
 
@@ -198,6 +223,22 @@ export default function Page() {
                   setState({ ...state, systemPrompt: e.target.value })
                 }
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="dataset">Dataset (JSON, max 1MB)</Label>
+              <Input
+                disabled={isLoading}
+                type="file"
+                id="dataset"
+                name="dataset"
+                accept=".json,application/json"
+                className="bg-border border-lightborder"
+                onChange={handleFileUpload}
+              />
+              <p className="text-xs text-zinc-400">
+                Upload a JSON file containing your dataset (optional)
+              </p>
             </div>
 
             <div className="space-y-2">

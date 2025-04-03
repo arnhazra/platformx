@@ -18,4 +18,7 @@ export class CreateDerivedModelDto {
 
   @IsNotEmpty()
   readonly isPublic: boolean
+
+  @IsNotEmpty()
+  readonly dataset: Record<string, any>[]
 }

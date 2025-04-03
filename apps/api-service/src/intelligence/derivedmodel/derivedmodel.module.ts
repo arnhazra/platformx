@@ -11,12 +11,17 @@ import { DerivedModelController } from "./derivedmodel.controller"
 import { DerivedModelService } from "./derivedmodel.service"
 import { FindFilterCategoriesQueryHandler } from "./queries/handler/find-filter-categories.handler"
 import { FindMyBuildsQueryHandler } from "./queries/handler/find-my-builds.handler"
+import { Dataset, DatasetSchema } from "./schemas/dataset.schema"
+import { DatasetRepository } from "./dataset.repository"
 
 @Module({
   imports: [
     CqrsModule,
     EntityModule.forFeature(
-      [{ name: DerivedModel.name, schema: DerivedModelSchema }],
+      [
+        { name: DerivedModel.name, schema: DerivedModelSchema },
+        { name: Dataset.name, schema: DatasetSchema },
+      ],
       DbConnectionMap.Intelligence
     ),
   ],
@@ -24,6 +29,7 @@ import { FindMyBuildsQueryHandler } from "./queries/handler/find-my-builds.handl
   providers: [
     DerivedModelService,
     DerivedModelRepository,
+    DatasetRepository,
     CreateDerivedModelCommandHandler,
     FindAllDerivedModelsQueryHandler,
     FindOneDerivedModelQueryHandler,
