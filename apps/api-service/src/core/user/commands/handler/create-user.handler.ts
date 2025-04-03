@@ -9,7 +9,7 @@ export class CreateUserCommandHandler
   constructor(private readonly repository: UserRepository) {}
 
   async execute(command: CreateUserCommand) {
-    const { email, name } = command
-    return await this.repository.create({ email, name })
+    const { email, name, walletAddress } = command
+    return await this.repository.create({ email, name, walletAddress })
   }
 }

@@ -7,11 +7,12 @@ import { EntityModule } from "@/shared/entity/entity.module"
 import { DbConnectionMap } from "@/shared/utils/db-connection.map"
 import { DerivedModelModule } from "./derivedmodel/derivedmodel.module"
 import { HistoryModule } from "./history/history.module"
+import { DatamarketplaceModule } from "./datamarketplace/datamarketplace.module"
 
 @Module({
   imports: [
     EntityModule.forRoot(
-      config.INTELLIGENCE_DATABASE_URI,
+      config.CORE_DATABASE_URI,
       DbConnectionMap.Intelligence
     ),
     BaseModelModule,
@@ -19,6 +20,7 @@ import { HistoryModule } from "./history/history.module"
     ChatModule,
     FavouritesModule,
     HistoryModule,
+    DatamarketplaceModule,
   ],
 })
 export class IntelligenceModule {}

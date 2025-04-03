@@ -32,4 +32,6 @@ export const endPoints = {
   favourites: `${apiHost}/favourites`,
   history: `${apiHost}/history`,
   newsroom: `${apiHost}/newsroom`,
+  infuraEndpoint:
+    "https://polygon-amoy.infura.io/v3/943e05852418451bacc19a24aeed016b",
 }

@@ -16,6 +16,9 @@ export class User extends Document {
   @Prop({ default: "user" })
   role: string
 
+  @Prop({ required: true, unique: true })
+  walletAddress: string
+
   @Prop({ type: Boolean, default: true })
   reduceCarbonEmissions: boolean
 

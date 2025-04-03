@@ -59,7 +59,7 @@ export class UserService {
 
   async verifyOTP(verifyOTPDto: VerifyOTPDto) {
     try {
-      const { email, hash, otp, name } = verifyOTPDto
+      const { email, hash, otp, name, walletAddress } = verifyOTPDto
       const isOTPValid = verifyOTP(email, hash, otp)
 
       if (isOTPValid) {
@@ -114,7 +114,7 @@ export class UserService {
           const newUser = await this.commandBus.execute<
             CreateUserCommand,
             User
-          >(new CreateUserCommand(email, name))
+          >(new CreateUserCommand(email, name, walletAddress))
 
           const tokenPayload = {
             id: newUser.id,

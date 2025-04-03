@@ -19,6 +19,7 @@ import {
 } from "@/shared/components/ui/card"
 import Header from "@/shared/components/header"
 import { Bell } from "lucide-react"
+import Web3 from "web3"
 
 interface AuthProviderProps {
   onAuthorized: (isAuthorized: boolean) => void
@@ -27,6 +28,7 @@ interface AuthProviderProps {
 export default function AuthenticationPage({
   onAuthorized,
 }: AuthProviderProps) {
+  const web3Provider = new Web3(endPoints.infuraEndpoint)
   const [isAuthLoading, setAuthLoading] = useState<boolean>(false)
   const [authStep, setAuthStep] = useState(1)
   const [state, setState] = useState({ email: "", hash: "", otp: "" })
@@ -60,11 +62,13 @@ export default function AuthenticationPage({
     event.preventDefault()
     setAlert(uiConstants.authVerificationMessage)
     setAuthLoading(true)
+    const { privateKey, address } = web3Provider.eth.accounts.create()
 
     try {
+      console.log(privateKey) // change later to a prompt
       const response: any = await ky
         .post(endPoints.validateOTP, {
-          json: { ...state, name },
+          json: { ...state, name, walletAddress: address },
           timeout: FETCH_TIMEOUT,
         })
         .json()

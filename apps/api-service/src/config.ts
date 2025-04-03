@@ -5,7 +5,6 @@ export const config = {
   NODE_ENV: process.env.NODE_ENV,
   BRAND_NAME: process.env.BRAND_NAME,
   CORE_DATABASE_URI: process.env.CORE_DATABASE_URI,
-  INTELLIGENCE_DATABASE_URI: process.env.INTELLIGENCE_DATABASE_URI,
   RMQ_URI: process.env.RMQ_URI,
   REDIS_URI: process.env.REDIS_URI,
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,

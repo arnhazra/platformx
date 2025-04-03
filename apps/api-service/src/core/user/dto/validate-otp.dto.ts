@@ -9,5 +9,8 @@ export class VerifyOTPDto extends PartialType(GenerateOTPDto) {
   @IsNotEmpty()
   readonly hash: string
 
+  @IsNotEmpty()
+  readonly walletAddress: string
+
   readonly name?: string
 }
