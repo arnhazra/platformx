@@ -14,8 +14,15 @@ export class CreateDerivedModelCommandHandler
   ) {}
 
   async execute(command: CreateDerivedModelCommand) {
-    const { baseModel, category, description, displayName, isPublic, dataset } =
-      command.createDerivedModelDto
+    const {
+      baseModel,
+      category,
+      description,
+      displayName,
+      isPublic,
+      dataset,
+      transactionHash,
+    } = command.createDerivedModelDto
     const derivedModel = await this.repository.create({
       baseModel: objectId(baseModel),
       category,
@@ -23,6 +30,7 @@ export class CreateDerivedModelCommandHandler
       displayName,
       modelOwner: objectId(command.userId),
       isPublic,
+      transactionHash,
     })
     await this.datasetRepository.create({
       derivedModel: objectId(derivedModel._id as string),

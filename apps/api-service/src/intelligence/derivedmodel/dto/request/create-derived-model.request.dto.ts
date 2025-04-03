@@ -14,6 +14,9 @@ export class CreateDerivedModelDto {
   readonly baseModel: string
 
   @IsNotEmpty()
+  readonly transactionHash: string
+
+  @IsNotEmpty()
   readonly isPublic: boolean
 
   @IsNotEmpty()

@@ -27,6 +27,9 @@ export class DerivedModel extends Document {
   responseFormat: string
 
   @Prop({ required: true })
+  transactionHash: string
+
+  @Prop({ required: true })
   isPublic: boolean
 }
 

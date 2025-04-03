@@ -22,11 +22,13 @@ import { endPoints } from "@/shared/constants/api-endpoints"
 import HTTPMethods from "@/shared/constants/http-methods"
 import useQuery from "@/shared/hooks/use-query"
 import { BaseModel } from "@/shared/types"
-import { ChangeEventHandler, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import ky from "ky"
 import { uiConstants } from "@/shared/constants/global-constants"
 import { SubscriptionModal } from "@/shared/components/subscriptionmodal"
 import { GlobalContext } from "@/context/globalstate.provider"
+import Web3 from "web3"
+import { abi, CONTRACT_ADDRESS } from "./abi"
 
 const categories = [
   "General",
@@ -62,13 +64,51 @@ export default function Page() {
     method: HTTPMethods.GET,
   })
 
+  async function mintNFT(recipient: string) {
+    try {
+      const web3 = new Web3(endPoints.infuraEndpoint)
+      const contract = new web3.eth.Contract(abi, CONTRACT_ADDRESS)
+      const account = web3.eth.accounts.privateKeyToAccount(
+        process.env.NEXT_PUBLIC_PRIVATE_KEY!
+      )
+      web3.eth.accounts.wallet.add(account)
+      web3.eth.defaultAccount = account.address
+      const data = contract.methods.mintDataProduct(recipient).encodeABI()
+      const nonce = await web3.eth.getTransactionCount(
+        account.address,
+        "latest"
+      )
+      const tx = {
+        from: account.address,
+        to: CONTRACT_ADDRESS,
+        data,
+        gas: 200000,
+        gasPrice: await web3.eth.getGasPrice(),
+        nonce,
+      }
+      const signedTx = await web3.eth.accounts.signTransaction(
+        tx,
+        process.env.NEXT_PUBLIC_PRIVATE_KEY!
+      )
+      const receipt = await web3.eth.sendSignedTransaction(
+        signedTx.rawTransaction!
+      )
+      return receipt.transactionHash
+    } catch (error) {
+      throw error
+    }
+  }
+
   const submitForm = async (event: any) => {
     event.preventDefault()
 
     try {
       setLoading(true)
       setMessage("")
-      await ky.post(endPoints.createDerivedModel, { json: state })
+      const transactionHash = await mintNFT(user?.walletAddress)
+      await ky.post(endPoints.createDerivedModel, {
+        json: { ...state, transactionHash },
+      })
       setMessage(uiConstants.modelCreated)
     } catch (error) {
       setMessage(uiConstants.modelCreationFailed)

@@ -7,14 +7,16 @@ const interceptor = new FetchInterceptor()
 
 interceptor.apply()
 interceptor.on("request", ({ request }) => {
-  request.headers.set(
-    "Authorization",
-    `Bearer ${localStorage.getItem("accessToken")}`
-  )
-  request.headers.set(
-    "refresh_token",
-    `${localStorage.getItem("refreshToken")}`
-  )
+  if (!request.url.includes("infura")) {
+    request.headers.set(
+      "Authorization",
+      `Bearer ${localStorage.getItem("accessToken")}`
+    )
+    request.headers.set(
+      "refresh_token",
+      `${localStorage.getItem("refreshToken")}`
+    )
+  }
 })
 
 interceptor.on("response", ({ response }) => {

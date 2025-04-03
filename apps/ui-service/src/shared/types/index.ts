@@ -46,6 +46,7 @@ export type User = {
   reduceCarbonEmissions: boolean
   activityLog: boolean
   createdAt: string
+  walletAddress: string
 }
 
 export type SubscriptionConfig = {
