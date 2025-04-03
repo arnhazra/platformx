@@ -1,9 +1,9 @@
 export const brandName = "PlatformX"
 
 export const uiConstants = {
-  homeHeader: "AI for everyone.",
+  homeHeader: "Data for everyone.",
   homeIntro1:
-    "We believe research will eventually lead to AGI i.e. Artificial General Intelligence, a system that can solve human-level problems",
+    "We believe innovation in data will drive the future. Our platform empowers researchers, developers, and businesses by providing access to high-quality data products, fueling advancements in AI and beyond.",
   connectionErrorMessage: "Connection Error",
   authVerificationMessage: "Verifying Credentials",
   errorMessage: "Not Found",
@@ -17,7 +17,7 @@ export const uiConstants = {
   confirmDescription:
     "This action may not be undone. Be sure before you click on continue, you can cancel if you do not want to proceed.",
   copyrightText: "Inc, All rights reserved.",
-  modelsHeader: `Explore our generic & trained models that supports advanced language processing and can generate, classify, and summarize text with high levels of coherence and accuracy.`,
+  modelsHeader: `Explore our generic & trained models that supports advanced language processing and can generate, classify, and summarize your datasets with high levels of coherence and accuracy.`,
   openSourceHeader: `${brandName} is open source and powered by open source software.`,
   safetyHeader: `We teach our AI good behavior so it can be both capable and aligned with human values. At every stage of the model training we apply methods to imbue the principles, policies and human values as suggested in the Model Spec⁠ and our safety policy taxonomies, minimizing harmful or biased outputs from the model.`,
   pricingHeader: `Preferred access to the latest AI models & more usage. Unlock all features including extensive AI usage for your application.`,
