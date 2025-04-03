@@ -1,0 +1,12 @@
+# compiled output
+/dist
+.DS_Store
+node_modules
+.env.development
+.vercel
+dist
+apps/ui-service/.next
+apps/ui-service/.vercel
+apps/ui-service/*.tsbuildinfo
+apps/ui-service/out
+apps/api-service/build
