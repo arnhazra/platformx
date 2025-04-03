@@ -22,6 +22,7 @@ export type DerivedModel = {
   responseFormat: string
   modelOwner: User
   isPublic: boolean
+  transactionHash: string
 }
 
 export type Favourites = {

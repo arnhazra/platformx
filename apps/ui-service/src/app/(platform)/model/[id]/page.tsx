@@ -1,5 +1,5 @@
 "use client"
-import { Bell, BookMarked, Heart, MessageCircle } from "lucide-react"
+import { Bell, BookMarked, Heart, Hexagon, MessageCircle } from "lucide-react"
 import { Badge } from "@/shared/components/ui/badge"
 import { buttonVariants } from "@/shared/components/ui/button"
 import {
@@ -150,7 +150,18 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 </li>
                 <li className="flex items-center justify-between">
                   <span>Model Owner</span>
-                  <span>{model?.data?.modelOwner?.name}</span>
+                  <span className="flex">
+                    {model?.data?.modelOwner?.name}
+                    <Link
+                      href={`https://www.oklink.com/amoy/tx/${model?.data?.transactionHash}`}
+                      target="_blank"
+                    >
+                      <Hexagon
+                        className="h-5 w-5 ms-1 text-green-500"
+                        fill="currentColor"
+                      />
+                    </Link>
+                  </span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span>Fine Tuned</span>
