@@ -15,6 +15,7 @@ import { FindFilterCategoriesQuery } from "./queries/impl/find-filter-categories
 import { OnEvent } from "@nestjs/event-emitter"
 import { EventsUnion } from "@/shared/utils/events.union"
 import { FindMyBuildsQuery } from "./queries/impl/find-my-builds.query"
+import { FindDatasetQuery } from "./queries/impl/find-dataset.query"
 
 @Injectable()
 export class DerivedModelService {
@@ -79,6 +80,23 @@ export class DerivedModelService {
 
       if (model) {
         return model
+      } else {
+        throw new NotFoundException()
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  @OnEvent(EventsUnion.GetDataset)
+  async viewData(datasetId: string) {
+    try {
+      const dataset = await this.queryBus.execute<FindDatasetQuery, any>(
+        new FindDatasetQuery(datasetId)
+      )
+
+      if (dataset) {
+        return dataset
       } else {
         throw new NotFoundException()
       }

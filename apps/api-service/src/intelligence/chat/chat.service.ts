@@ -46,6 +46,23 @@ export class ChatService {
     }
   }
 
+  async getDatasetById(datasetId: string) {
+    try {
+      const dataset = await this.eventEmitter.emitAsync(
+        EventsUnion.GetDataset,
+        datasetId
+      )
+
+      if (dataset && dataset.length && dataset[0] !== null) {
+        return dataset.shift()
+      } else {
+        throw new BadRequestException("Model not found")
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   async getThreadById(threadId: string, isFirstMessage: boolean) {
     try {
       if (isFirstMessage) {
@@ -98,21 +115,21 @@ export class ChatService {
         !aiGenerationDto.threadId
       )
       const gModel = await this.getModelById(modelId)
+      const dataset = await this.getDatasetById(modelId)
+      const dataToBeSearched = dataset?.data[0] ?? null
 
       if (gModel.baseModel.isPro && !isSubscriptionActive) {
         throw new ForbiddenException(statusMessages.subscriptionNotFound)
       }
 
-      const systemPrompt =
-        "This is a dataset, users will ask questions based on this dataset. " +
-        "You are a helpful assistant. " +
-        "Please answer the questions based on the dataset. " +
-        "If you don't know the answer, please say 'I don't know'. " +
-        "If the question is not related to the dataset, please say 'I don't know'. " +
-        "If the question is not clear, please ask for clarification. " +
-        "If the question is too complex, please ask for clarification. " +
-        "The details of the dataset is below: " +
-        JSON.stringify(gModel)
+      const systemPrompt = `This is a dataset, users will ask questions based on this dataset. 
+        You are a helpful assistant. Please answer the questions based on the dataset.
+        If you don't know the answer, please say 'I don't know'.
+        If the question is not related to the dataset, please say 'I don't know'.
+        If the question is not clear, please ask for clarification.
+        If the question is too complex, please ask for clarification.
+        The details of the dataset is below: ${JSON.stringify(dataset)}. "The data schema looks like this: " +
+        ${JSON.stringify(dataToBeSearched)}`
 
       if (gModel.baseModel.genericName.includes("gemini")) {
         const { response } = await GeminiStrategy(

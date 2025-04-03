@@ -13,6 +13,7 @@ import { FindFilterCategoriesQueryHandler } from "./queries/handler/find-filter-
 import { FindMyBuildsQueryHandler } from "./queries/handler/find-my-builds.handler"
 import { Dataset, DatasetSchema } from "./schemas/dataset.schema"
 import { DatasetRepository } from "./dataset.repository"
+import { FindDatasetQueryHandler } from "./queries/handler/find-dataset.handler"
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { DatasetRepository } from "./dataset.repository"
     FindOneDerivedModelQueryHandler,
     FindFilterCategoriesQueryHandler,
     FindMyBuildsQueryHandler,
+    FindDatasetQueryHandler,
   ],
 })
 export class DerivedModelModule {}

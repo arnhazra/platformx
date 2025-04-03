@@ -16,6 +16,7 @@ import { EventEmitter2 } from "@nestjs/event-emitter"
 import { EventsUnion } from "@/shared/utils/events.union"
 import { sortOptions } from "./data/model-sort-options"
 import { ModRequest } from "@/shared/auth/types/mod-request.interface"
+import { APIKeyGuard } from "@/shared/auth/apikey.guard"
 
 @Controller("derivedmodel")
 export class DerivedModelController {
@@ -84,6 +85,16 @@ export class DerivedModelController {
         modelId,
       })
       return await this.service.findOneDerivedModel(modelId)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  @UseGuards(APIKeyGuard)
+  @Get("dataset/:datasetId")
+  async viewData(@Param("datasetId") datasetId: string) {
+    try {
+      return await this.service.viewData(datasetId)
     } catch (error) {
       throw error
     }
