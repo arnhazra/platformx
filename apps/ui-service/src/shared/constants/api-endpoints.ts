@@ -26,7 +26,7 @@ export const endPoints = {
   intelligenceChat: `${apiHost}/chat`,
   getOneDerivedModel: `${apiHost}/derivedmodel`,
   createDerivedModel: `${apiHost}/derivedmodel/create`,
-  getDerivedModels: `${apiHost}/derivedmodel/listings`,
+  getDerivedModels: `${apiHost}/datamarketplace/listings`,
   getMyBuilds: `${apiHost}/derivedmodel/mybuilds`,
   getDerivedModelFilterAndSortOptions: `${apiHost}/derivedmodel/filters-and-sort-options`,
   favourites: `${apiHost}/favourites`,
