@@ -245,7 +245,7 @@ export default function Page() {
               <Label htmlFor="isPublic">Visibility</Label>
               <Select
                 value={state.isPublic ? "true" : "false"}
-                disabled={isLoading || user.role === "user"}
+                disabled={isLoading}
                 name="isPublic"
                 required
                 onValueChange={(value) =>
