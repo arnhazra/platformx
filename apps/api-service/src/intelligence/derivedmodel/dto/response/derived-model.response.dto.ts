@@ -11,6 +11,5 @@ export class DerivedModelResponseDto {
   isFineTuned: boolean
   systemPrompt: string
   responseFormat: string
-  hasWebSearchCapability: boolean
   isPublic: boolean
 }

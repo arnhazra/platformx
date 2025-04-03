@@ -9,8 +9,7 @@ export default async function OpenAIStrategy(
   topP: number,
   thread: Thread[],
   prompt: string,
-  systemPrompt: string,
-  webSearchResult?: string
+  systemPrompt: string
 ) {
   const chatHistory: ChatMessage[] = []
   const content: ChatMessage[] = thread.flatMap((chat) => [
@@ -42,9 +41,7 @@ export default async function OpenAIStrategy(
       ...chatHistory,
       {
         role: "user",
-        content: !!webSearchResult
-          ? `Summarize the data from web search: ${webSearchResult}.`
-          : prompt,
+        content: prompt,
       },
     ],
   })

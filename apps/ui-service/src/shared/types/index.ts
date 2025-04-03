@@ -20,7 +20,6 @@ export type DerivedModel = {
   baseModel: BaseModel | null | undefined
   isFineTuned: boolean
   responseFormat: string
-  hasWebSearchCapability: boolean
   modelOwner: User
   isPublic: boolean
 }

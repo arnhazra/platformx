@@ -29,9 +29,6 @@ export class DerivedModel extends Document {
   @Prop({ required: true, default: "text" })
   responseFormat: string
 
-  @Prop({ required: true, default: false })
-  hasWebSearchCapability: boolean
-
   @Prop({ required: true })
   isPublic: boolean
 }

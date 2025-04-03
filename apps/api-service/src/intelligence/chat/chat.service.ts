@@ -92,9 +92,7 @@ export class ChatService {
     isSubscriptionActive: boolean
   ) {
     try {
-      let webSearchResponse = ""
-      const { modelId, prompt, temperature, topP, useWebSearch } =
-        aiGenerationDto
+      const { modelId, prompt, temperature, topP } = aiGenerationDto
       const threadId =
         aiGenerationDto.threadId ?? new Types.ObjectId().toString()
       const thread = await this.getThreadById(
@@ -102,13 +100,6 @@ export class ChatService {
         !aiGenerationDto.threadId
       )
       const gModel = await this.getModelById(modelId)
-
-      if (useWebSearch && gModel.hasWebSearchCapability) {
-        const uri = `${config.GOOGLE_CSE_API_URI}&q=${aiGenerationDto.prompt}`
-        const response = await lastValueFrom(this.httpService.get<any>(uri))
-        const cleanedData = this.cleanSearchResult(response.data)
-        webSearchResponse = JSON.stringify(cleanedData)
-      }
 
       if (gModel.baseModel.isPro && !isSubscriptionActive) {
         throw new ForbiddenException(statusMessages.subscriptionNotFound)
@@ -121,8 +112,7 @@ export class ChatService {
           topP ?? gModel.baseModel.defaultTopP,
           thread,
           prompt,
-          gModel.systemPrompt,
-          useWebSearch && gModel.hasWebSearchCapability ? webSearchResponse : ""
+          gModel.systemPrompt
         )
         await this.commandBus.execute<CreateThreadCommand, Thread>(
           new CreateThreadCommand(userId, threadId, prompt, response)
@@ -135,8 +125,7 @@ export class ChatService {
           topP ?? gModel.baseModel.defaultTopP,
           thread,
           prompt,
-          gModel.systemPrompt,
-          useWebSearch && gModel.hasWebSearchCapability ? webSearchResponse : ""
+          gModel.systemPrompt
         )
         await this.commandBus.execute<CreateThreadCommand, Thread>(
           new CreateThreadCommand(userId, threadId, prompt, response)

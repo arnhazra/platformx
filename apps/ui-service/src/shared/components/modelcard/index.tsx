@@ -96,8 +96,7 @@ export function BaseModelCard({ model }: BaseModelCardProps) {
 }
 
 export function DerivedModelCard({ model }: DerivedModelCardProps) {
-  const { _id, baseModel, category, displayName, hasWebSearchCapability } =
-    model
+  const { _id, baseModel, category, displayName } = model
 
   return (
     <Link href={`/model/${_id}`}>
@@ -116,9 +115,6 @@ export function DerivedModelCard({ model }: DerivedModelCardProps) {
 
                 <Show condition={baseModel?.isPro || false}>
                   <Badge className="bg-primary hover:bg-primary ">Pro</Badge>
-                </Show>
-                <Show condition={hasWebSearchCapability}>
-                  <Globe className="scale-75 text-cyan-400" />
                 </Show>
               </div>
               <div className="flex items-center space-x-2 text-xs mt-1">
