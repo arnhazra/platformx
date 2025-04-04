@@ -36,14 +36,4 @@ export const sidebarLinks: LinkData[] = [
     link: "/mybuilds",
     icon: <Bolt className="scale-75" />,
   },
-  {
-    displayName: "NewsRoom",
-    link: "/newsroom",
-    icon: <Newspaper className="scale-75" />,
-  },
-  {
-    displayName: "API Reference",
-    link: "/apireference",
-    icon: <Book className="scale-75" />,
-  },
 ]

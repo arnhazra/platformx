@@ -188,20 +188,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
               </ul>
             </div>
           </CardContent>
-          <CardFooter className="flex flex-row items-center bg-muted/50 px-6 py-3">
-            <Link
-              className={cn(
-                buttonVariants({
-                  variant: "default",
-                  className: "w-full bg-border hover:bg-border",
-                })
-              )}
-              href="/apireference"
-            >
-              API Reference
-              <BookMarked className="scale-75" />
-            </Link>
-          </CardFooter>
         </Card>
         <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2 xl:col-span-3">
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">

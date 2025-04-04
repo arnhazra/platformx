@@ -151,9 +151,9 @@ export default function Page() {
       />
       <Card className="w-full max-w-2xl mx-auto bg-background border-border text-white">
         <CardHeader>
-          <CardTitle>Create a Model</CardTitle>
+          <CardTitle>Create a Dataset</CardTitle>
           <CardDescription className="text-zinc-300">
-            Fill out the form below to create a new model.
+            Fill out the form below to create a new dataset.
           </CardDescription>
         </CardHeader>
         <form onSubmit={submitForm}>
@@ -166,7 +166,7 @@ export default function Page() {
                 className="bg-border border-lightborder"
                 id="displayName"
                 name="displayName"
-                placeholder="Enter a name for your model"
+                placeholder="Enter a name for your dataset"
                 onChange={(e): void =>
                   setState({ ...state, displayName: e.target.value })
                 }
@@ -180,7 +180,7 @@ export default function Page() {
                 disabled={isLoading}
                 id="description"
                 name="description"
-                placeholder="Describe your model's purpose and capabilities"
+                placeholder="Describe your dataset's purpose and capabilities"
                 className="min-h-[100px] bg-border border-lightborder"
                 required
                 onChange={(e): void =>
@@ -220,7 +220,7 @@ export default function Page() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="baseModel">Base Model</Label>
+              <Label htmlFor="baseModel">Dataset Query Model</Label>
               <Select
                 disabled={isLoading}
                 name="baseModel"
@@ -233,7 +233,7 @@ export default function Page() {
                   id="baseModel"
                   className="bg-border border-lightborder"
                 >
-                  <SelectValue placeholder="Select a base model" />
+                  <SelectValue placeholder="Select a model" />
                 </SelectTrigger>
                 <SelectContent className="bg-border border-lightborder">
                   {baseModels?.data?.map((model) => (
