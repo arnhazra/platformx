@@ -128,7 +128,7 @@ export class ChatService {
         If the question is not related to the dataset, please say 'I don't know'.
         If the question is not clear, please ask for clarification.
         If the question is too complex, please ask for clarification.
-        The details of the dataset is below: ${JSON.stringify(dataset)}. "The data schema looks like this: " +
+        The details of the dataset is below: ${JSON.stringify(gModel)}. "The data schema looks like this: " +
         ${JSON.stringify(dataToBeSearched)}`
 
       if (gModel.baseModel.genericName.includes("gemini")) {
